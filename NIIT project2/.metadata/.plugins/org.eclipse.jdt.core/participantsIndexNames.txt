@@ -1,0 +1,11 @@
+INDEX VERSION 1.130
+G:\NIIT project2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2441113380.index
+\CollaborationController\src\main\java
+G:\NIIT project2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1007106304.index
+\CollaborationController\src\main\resources
+G:\NIIT project2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\945908890.index
+\CollaborationFrontEnd\src
+G:\NIIT project2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2828530852.index
+\CollaborationFrontEnd\src
+G:\NIIT project2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3510889170.index
+\CollaborationController\src\main\java

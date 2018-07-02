@@ -1,0 +1,56 @@
+package com.koffi.collaboration;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Date;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.koffi.collaboration.dao.FriendDAO;
+import com.koffi.collaboration.domain.Friend;
+
+public class FriendTestCase {
+	
+	private static AnnotationConfigApplicationContext context;
+	
+	//@Autowired
+	//private static Friend friend;
+	
+	@Autowired
+	private static FriendDAO friendDAO;
+	
+	@BeforeClass
+	public static void init()
+	{
+		context = new AnnotationConfigApplicationContext();
+		
+		context.scan("com.koffi");
+		context.refresh();
+		
+		friendDAO =(FriendDAO) context.getBean("friendDAO");
+		//friend = (Friend)context.getBean("friend");
+	}
+
+	@Test
+	public void saveFriendTestCase() {
+		Friend friend = new Friend();
+		friend.setDateReg(new Date());
+		//friend.setDOB("10/03/2000");
+		friend.setFirst_name("Mark");
+		friend.setGender("male");
+		friend.setIsOnline('Y');
+		friend.setLast_name("A.");
+		friend.setLast_seen("20/04/2018");
+		friend.setMail_id("kvvk@gmail.com");
+		friend.setPassword("111");
+		friend.setRole("Manager");
+		friend.setStatus('Y');
+		friend.setFriendname("hvvhh");
+		Boolean status = friendDAO.saveFriend(friend); 
+		assertEquals("Save friend",true, status);
+	}
+
+}

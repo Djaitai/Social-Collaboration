@@ -1,0 +1,49 @@
+package com.koffi.collaboration.domain;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@Table(name="c_blog")
+@Entity
+public class Blog extends BaseDomain{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int blog_id;
+
+	@Column(nullable = false)
+	private String blog_title;
+	
+	@Column(nullable = false)
+	@Lob
+	private String blog_description;
+	
+	private String username; // foreigner key
+	private String status;// not null. A->Accepted, N->new. R->reject
+	//CREATE ONE MORE FIELD it should be nullable R->rejected/Accepted blog
+	
+	//ONE MORE METHOD // COMMENT THE BLOG// CAN OT ACHIEVE WITH BLIOG TABLE
+	//CREATE BLOGCOMMENT TABLE
+
+	private int like;
+	private int unlike;
+	private String remark;
+	private String date_time;//Default SysteDate............
+
+	@Lob
+	private String rejected;
+
+	
+
+	
+}

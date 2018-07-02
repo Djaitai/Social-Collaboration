@@ -1,0 +1,45 @@
+package util;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Date_Time {
+	
+	public String getDateTime()
+	{
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy @ HH:mm");
+		Date date = new Date();
+		String dateTime = dateFormat.format(date.toString());
+		System.out.println("Date: "+dateTime);
+		return dateTime;
+	}
+	
+	
+	public Date toDate(String DOB) throws ParseException
+	{
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); 
+		Date date = (Date)dateFormat.parse(DOB);
+		return date;
+	}
+
+	public String toStringDate(Date date)
+	{
+		DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy"); 
+		 String StringDate = dateFormat.format(date).toString();
+		 return StringDate;
+	}
+	
+	
+	public static void main(String[] args) throws ParseException {
+		Date_Time date_Time = new Date_Time();
+		date_Time.getDateTime();
+		Date date = date_Time.toDate("22-05-1995");
+		System.out.println("Date - "+date);
+
+		String dateFormat = date_Time.toStringDate(date);
+		System.out.println("Date Format - "+dateFormat);
+	}
+
+}

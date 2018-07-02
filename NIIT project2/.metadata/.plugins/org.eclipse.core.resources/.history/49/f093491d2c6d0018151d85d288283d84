@@ -1,0 +1,59 @@
+package com.koffi.collaboration;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.Date;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.koffi.collaboration.dao.FriendDAO;
+import com.koffi.collaboration.domain.Friend;
+
+public class FriendTestCase {
+	
+	private static AnnotationConfigApplicationContext context;
+	
+	//@Autowired
+	//private static Friend friend;
+	
+	@Autowired
+	private static FriendDAO friendDAO;
+	
+	@BeforeClass
+	public static void init()
+	{
+		context = new AnnotationConfigApplicationContext();
+		
+		context.scan("com.koffi");
+		context.refresh();
+		
+		friendDAO =(FriendDAO) context.getBean("friendDAO");
+		//friend = (Friend)context.getBean("friend");
+	}
+
+	@Test
+	public void saveFriendTestCase() {
+		Friend friend = new Friend();
+		friend.setFriend_address("Jayanagar");
+		friend.setFriend_f_name("Manu");
+		friend.setFriend_gender("Male");
+		friend.setFriend_id("100");
+		friend.setFriend_l_name("Kumar");
+		friend.setFriend_mobile("9874215898");
+		friend.setFriendisOnline('Y');
+		friend.setUser_address("Jayanagar");
+		friend.setUser_f_name("Joe");
+		friend.setUser_gender("Male");
+		friend.setUsername("Ben");
+		friend.setUserIsOnline('Y');
+		friend.setUser_mobile("987454789");
+		friend.setUser_l_name("G. P.");
+		friend.setUser_id("100");
+		Boolean status = friendDAO.save(friend); 
+		assertEquals("Save friend",true, status);
+	}
+
+}

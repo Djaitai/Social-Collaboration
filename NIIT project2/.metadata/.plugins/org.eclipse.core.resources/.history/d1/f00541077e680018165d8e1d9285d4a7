@@ -1,0 +1,50 @@
+package com.koffi.collaboration;
+
+import static org.junit.Assert.assertEquals;
+
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.koffi.collaboration.dao.BlogDAO;
+import com.koffi.collaboration.domain.Blog;
+
+public class BlogTestCase {
+	
+	private static AnnotationConfigApplicationContext context;
+	
+	@Autowired
+	private static Blog blog;
+	
+	@Autowired
+	private static BlogDAO blogDAO;
+	
+	@BeforeClass
+	public static void init()
+	{
+		context = new AnnotationConfigApplicationContext();		
+		context.scan("com.koffi");
+		context.refresh();		
+		blogDAO =(BlogDAO) context.getBean("blogDAO");
+		//blog = (Blog)context.getBean("blog");
+	}
+
+	@Test
+	public void saveBlogTestCase() {
+		//Blog blog = new Blog();
+		//blog.setBlog_id(200);
+		blog.setBlog_title("My blog");
+		blog.setBlog_description("This is my first blog");
+		blog.setLike(1);
+		blog.setDate_time("05-06-2018");
+		blog.setRejected("N");
+		//blog.setStatus("A");
+		blog.setUnlike(0);
+		blog.setRemark("Good blog");
+		blog.setUsername("johan");
+		Boolean status = blogDAO.addBlog(blog); 
+		assertEquals("Save  blog",true, status);
+	}
+
+}

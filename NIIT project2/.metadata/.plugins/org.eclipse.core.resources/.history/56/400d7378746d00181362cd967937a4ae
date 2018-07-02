@@ -1,0 +1,5 @@
+package com.koffi.collaboration.domain;
+
+public class Blog {
+
+}

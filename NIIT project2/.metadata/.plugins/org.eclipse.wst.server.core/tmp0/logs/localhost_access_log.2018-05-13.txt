@@ -1,0 +1,4 @@
+0:0:0:0:0:0:0:1 - - [13/May/2018:09:01:29 +0530] "POST /CollaborationController/applyJob HTTP/1.1" 404 1047
+127.0.0.1 - - [13/May/2018:09:02:12 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [13/May/2018:09:02:17 +0530] "POST /CollaborationController/applyJob HTTP/1.1" 200 258
+0:0:0:0:0:0:0:1 - - [13/May/2018:09:02:58 +0530] "POST /CollaborationController/applyJob HTTP/1.1" 200 258

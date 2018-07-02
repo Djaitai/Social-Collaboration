@@ -1,0 +1,16 @@
+127.0.0.1 - - [07/May/2018:09:55:30 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:01:34 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 404 1047
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:02:27 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 404 1047
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:04:31 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 200 551
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:07:07 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 200 551
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:44:03 +0530] "POST /CollaborationController/addJob HTTP/1.1" 500 16637
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:44:25 +0530] "POST /CollaborationController/addJob HTTP/1.1" 500 16637
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:47:44 +0530] "POST /CollaborationController/addJob HTTP/1.1" 500 10878
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:47:51 +0530] "POST /CollaborationController/addJob HTTP/1.1" 500 10878
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:49:45 +0530] "POST /CollaborationController/addJob HTTP/1.1" 500 10878
+127.0.0.1 - - [07/May/2018:10:50:26 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:51:36 +0530] "POST /CollaborationController/addJob HTTP/1.1" 200 666
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:55:49 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 200 314
+0:0:0:0:0:0:0:1 - - [07/May/2018:10:56:20 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 200 669
+0:0:0:0:0:0:0:1 - - [07/May/2018:11:05:49 +0530] "POST /CollaborationController/updateJob HTTP/1.1" 500 10888
+0:0:0:0:0:0:0:1 - - [07/May/2018:11:06:39 +0530] "POST /CollaborationController/addJob HTTP/1.1" 200 998

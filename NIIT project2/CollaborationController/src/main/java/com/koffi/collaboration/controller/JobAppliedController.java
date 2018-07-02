@@ -1,0 +1,124 @@
+package com.koffi.collaboration.controller;
+
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.koffi.collaboration.domain.Job;
+import com.koffi.collaboration.domain.JobApplied;
+import com.koffi.collaboration.service.JobAppliedService;
+
+import util.Date_Time;
+
+@RestController
+public class JobAppliedController {
+	
+	Logger logger = LoggerFactory.getLogger(JobAppliedController.class);
+	
+	@Autowired
+	private JobApplied jobApplied;
+	
+	@ Autowired
+	JobAppliedService jobAppliedService;
+	
+	@Autowired
+	HttpSession httpSession;
+	
+	@PostMapping("/applyJob")
+	public ResponseEntity<JobApplied> applyJob(@RequestBody Job job)
+	{
+		logger.info("Apply Job initiated");
+		
+		jobApplied.setCompany(job.getCompany());
+		Date_Time dt = new Date_Time();
+		jobApplied.setDate(dt.getDateTime());
+		jobApplied.setLocation(job.getLocation());
+		jobApplied.setPosition(job.getPosition());
+		jobApplied.setStatus('A');
+		jobApplied.setTitle(job.getTitle());
+		jobApplied.setUsername(httpSession.getAttribute("username").toString());
+
+		boolean value = jobAppliedService.applyNew(jobApplied);
+		if(value)
+		{
+			logger.info("Job has been Applied for");
+			jobApplied.setErrorCode("200");
+			jobApplied.setErrorMessage("Job has been Applied");
+		}
+		else
+		{
+			logger.info("Apply job has got some error");
+			jobApplied = new JobApplied();
+			jobApplied.setErrorCode("400");
+			jobApplied.setErrorMessage("Job has not been Added");
+		}
+		return new ResponseEntity<JobApplied> (jobApplied, HttpStatus.OK);
+	}
+
+	@GetMapping("/viewMyJobs")
+	public ResponseEntity<List<JobApplied>> getJobsofUser()
+	{
+		logger.info("Fetching Jobs by username");
+		if(httpSession.getAttribute("username")==null)
+		{
+			return null;
+		}
+		
+		
+		
+		
+		List<JobApplied> list = jobAppliedService.listByUser(httpSession.getAttribute("username").toString());
+		if(list.isEmpty())
+		{
+			logger.info("Job list seems to be empty");
+			return null;
+		}
+		else
+		{
+			logger.info("Job list has been found");
+			for(JobApplied jobApplied : list)
+			{
+				System.out.println(jobApplied.getCompany()+" job apllied...............");
+				jobApplied.setErrorCode("200");
+				jobApplied.setErrorMessage("You have applied for this Job");
+			}
+		}
+		return new ResponseEntity<List<JobApplied>> (list, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	@GetMapping("/viewApplications")
+	public ResponseEntity<List<JobApplied>> getJobsByCompany()
+	{
+		logger.info("Fetching Jobs by username");
+		List<JobApplied> list = jobAppliedService.listByCompany();
+		if(list.isEmpty())
+		{
+			logger.info("Job list seems to be empty");
+			return null;
+		}
+		else
+		{
+			logger.info("Job list has been found");
+			for(JobApplied jobApplied : list)
+			{
+				jobApplied.setErrorCode("200");
+				jobApplied.setErrorMessage("Has applied for this Job");
+			}
+		}
+		return new ResponseEntity<List<JobApplied>> (list, HttpStatus.OK);
+	}
+}

@@ -1,0 +1,75 @@
+package com.koffi.collaboration.controller;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.koffi.collaboration.domain.Forum;
+import com.koffi.collaboration.service.ForumService;
+
+import util.Date_Time;
+
+@RestController
+public class ForumController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ForumController.class);
+	
+	@Autowired
+	private ForumService forumService;
+	
+	@Autowired 
+	private Forum forum;
+	
+	@Autowired
+	HttpSession httpSession;
+	
+	@PostMapping("/addForum")
+	ResponseEntity<Forum> addForum(@RequestBody Forum forum)
+	{
+		if(httpSession.getAttribute("username")== null)
+		{
+			logger.info("You are not logged in");
+			return null;
+		}
+		
+		else
+		{
+			logger.info("Add to Forum");
+			forum.setUsername(httpSession.getAttribute("username").toString());
+			Date_Time date_Time = new Date_Time();
+			forum.setDate_time(date_Time.getDateTime());
+			forum.setStatus('P');
+			boolean value = forumService.addForum(forum);
+			if(value)
+			{
+				forum.setErrorCode("200");
+				forum.setErrorMessage("Forum is added succefuly");
+			}
+			else
+			{
+				forum.setErrorCode("404");
+				forum.setErrorMessage("Forum not added");
+				logger.error("Add Forum error");
+				return null;
+			}
+			logger.info("Add forum success");
+			return new ResponseEntity<Forum>(forum, HttpStatus.OK);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Social Collaboration</title>
+<style>
+body {
+	background-image: url("c_resources/images/blog-bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment: fixed;
+}
+
+.MyStyle {
+	background-image: url("c_resources/images/blog-bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-attachment: fixed;
+}
+</style>
+</head>
+<body>
+	BlogController.java
+</body>
+</html>

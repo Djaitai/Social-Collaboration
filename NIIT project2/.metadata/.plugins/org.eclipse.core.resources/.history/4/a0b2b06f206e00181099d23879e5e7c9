@@ -1,0 +1,149 @@
+package com.koffi.collaboration.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.koffi.collaboration.domain.Blog;
+import com.koffi.collaboration.service.BlogService;
+
+import util.Date_Time;
+
+@RestController
+public class BlogController {
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
+	
+	@Autowired
+	private BlogService bloggerService;
+	
+	@Autowired
+	private Blog blog;
+	
+	@Autowired
+	private HttpSession session;
+	
+	
+	@PostMapping("/addBlog")
+	public ResponseEntity<Blog> addBlogger(@RequestBody Blog blog)
+	{
+		logger.info("Blog Recieved");
+		blog.setStatus("Submitted");
+		blog.setUsername(session.getAttribute("username").toString());
+		Date_Time dt = new Date_Time();
+		String date = dt.getDateTime();
+		blog.setDate_time(date);
+		boolean value = blogService.addBlog(blog);
+		
+		if(value == true)
+		{
+			logger.info("Blogger added successfully");
+			blogger.setErrorCode("100");
+			blogger.setErrorMessage("Blogger has been added");
+		}
+		else
+		{
+			logger.info("Blogger has not been added");
+			blogger.setErrorCode("404");
+			blogger.setErrorMessage("Adding Blogger Unsuccessful");
+		}
+		return new ResponseEntity<Blog>(blogger, HttpStatus.OK);
+	}
+	
+	@GetMapping("/admin_getAllBloggers")
+	public ResponseEntity<List<Blog>> getAllBloggers()
+	{
+		List<Blog> list = bloggerService.getAllBlogs();
+		if(list.isEmpty())
+		{
+			blog.setErrorCode("100");
+			blog.setErrorMessage("No bloggers are available");
+		}
+		
+		blog.setErrorCode("200");
+		blog.setErrorMessage("Success");
+		System.out.println("in get admin all bloggers...................");
+		return new ResponseEntity<List<Blog>>(list, HttpStatus.OK);
+	}
+	
+	
+	
+	@GetMapping("/getBlogger-{title}")
+	public ResponseEntity<Blog> getBlogger(@PathVariable ("title") String title)
+	{
+		System.out.println("Name - "+title);
+		blog = bloggerService.getBlog(title);
+		if(blog == null)
+		{
+			blog = new Blog();
+			blog.setErrorCode("100");
+			blog.setErrorMessage("Blogger is not available");
+		}
+		else
+		{
+			blog.setErrorCode("200");
+			blog.setErrorMessage("Blogger Details retrieved");
+		System.out.println("enter into get blogger by title.................");
+		}
+		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+	}
+	
+	
+	
+	@PostMapping("/admin_approveBlogger")
+	public ResponseEntity<Blog> approveBlogger(@RequestBody Blog blogger)
+	{
+		logger.info("Blogger recieved");
+		String title = blogger.getBlog_title();
+		blogger = bloggerService.getBlog(title);
+		blogger.setStatus("Approved");
+		boolean value = bloggerService.approveBlog(blogger);
+		if(value == true)
+		{
+			logger.info("Blogger approved successfully");
+			blogger.setErrorCode("100");
+			blogger.setErrorMessage("Blogger has been approved");
+		}
+		else
+		{
+			logger.info("Blogger has not been approved");
+			blogger.setErrorCode("404");
+			blogger.setErrorMessage("Approving Blogger Unsuccessful");
+		}
+		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+	}
+	
+	@PostMapping("/admin_rejectBlogger")
+	public ResponseEntity<Blog> rejectBlogger(@RequestBody Blog blog)
+	{
+		logger.info("Blogger recieved");
+		String title = blog.getBlog_title();
+		blog = bloggerService.getBlog(title);
+		blog.setStatus("Rejected");
+		boolean value = bloggerService.approveBlog(blog);
+		if(value == true)
+		{
+			logger.info("Blogger rejected successfully");
+			blog.setErrorCode("100");
+			blog.setErrorMessage("Blogger has been rejected");
+		}
+		else
+		{
+			logger.info("Blogger has not been rejected");
+			blog.setErrorCode("404");
+			blog.setErrorMessage("Rejecting Blogger Unsuccessful");
+		}
+		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+	}
+}

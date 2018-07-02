@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="452" key="DIALOG_X_ORIGIN"/>
+		<item value="247" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="chat" key="selection"/>
+		<item value="true" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="chat"/>
+			<item value="job"/>
+			<item value="id"/>
+			<item value="friend_id"/>
+			<item value="user_id"/>
+			<item value="FRIEND_ID"/>
+			<item value="freid_id"/>
+			<item value="viewJobs"/>
+			<item value="jobs"/>
+			<item value="myJobs"/>
+			<item value="replies"/>
+			<item value="blogComments"/>
+			<item value="addEvents()&quot;"/>
+			<item value="User"/>
+			<item value="user"/>
+		</list>
+		<list key="replacehistory">
+			<item value="username"/>
+			<item value="friendID"/>
+			<item value="userID"/>
+			<item value=""/>
+			<item value="Event"/>
+			<item value="event"/>
+			<item value="logger"/>
+			<item value="blog"/>
+			<item value="Blog"/>
+			<item value="httpSession"/>
+			<item value="friend"/>
+			<item value="Friend"/>
+			<item value="forum"/>
+			<item value="Forum"/>
+			<item value="forumDAO"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="284" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="376" key="DIALOG_HEIGHT"/>
+		<item value="860" key="DIALOG_X_ORIGIN"/>
+		<item value="360" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>
